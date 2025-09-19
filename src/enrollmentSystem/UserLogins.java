@@ -4,65 +4,88 @@
  */
 package enrollmentSystem;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
 //UserLogins class to manage user login information.
 public class UserLogins {
+    private static final Dotenv dotenv = Dotenv.load();
     
     // Method to establish connection for student login
     public static Connection stud(){
-        try{
-            // Load the SQL Server JDBC driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            // Establish connection using student credentials
-            Connection studConnect = DriverManager.getConnection("jdbc:sqlserver://192.168.1.3:1433;=instance=SQLEXPRESS:1433;databaseName=EnrollmentSystem;encrypt=true;trustServerCertificate=true","Student","12345");
-            // Return the connection object
-            return studConnect;
-        // Display error message if connection fails    
-        }catch(Exception e){
-            
+        try {
+            String url = String.format(
+                "jdbc:sqlserver://%s:%s;instance=%s;databaseName=%s;encrypt=true;trustServerCertificate=true",
+                dotenv.get("DB_HOST"),
+                dotenv.get("DB_PORT"),
+                dotenv.get("DB_INSTANCE"),
+                dotenv.get("DB_NAME")
+            );
+
+            return DriverManager.getConnection(
+                url,
+                dotenv.get("DB_USER_STUDENT"),
+                dotenv.get("DB_PASS_STUDENT")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e);
+            return null;
         }
     // Return null if connection fails
     return null;
     }
     // Method to establish connection for staff login
     public static Connection staff(){
-      try{
-            // Load the SQL Server JDBC driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-             // Establish connection using staff credentials
-            Connection studConnect = DriverManager.getConnection("jdbc:sqlserver://192.168.1.3:1433;instance=SQLEXPRESS:1433;databaseName=EnrollmentSystem;encrypt=true;trustServerCertificate=true","Staff","12345");
-            // Return the connection object
-            return studConnect;
-        // Display error message if connection fails    
-        }catch(Exception e){
+        try {
+            String url = String.format(
+                "jdbc:sqlserver://%s:%s;instance=%s;databaseName=%s;encrypt=true;trustServerCertificate=true",
+                dotenv.get("DB_HOST"),
+                dotenv.get("DB_PORT"),
+                dotenv.get("DB_INSTANCE"),
+                dotenv.get("DB_NAME")
+            );
+
+            return DriverManager.getConnection(
+                url,
+                dotenv.get("DB_USER_STAFF"),
+                dotenv.get("DB_PASS_STAFF")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e);
+            return null;
         }
-    // Return null if connection fails
-    return null;  
-    }
     // Method to establish connection for admin login
     public static Connection admin(){
-        try{
-            // Load the SQL Server JDBC driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            // Establish connection using admin credentials
-            Connection adminConnect = DriverManager.getConnection("jdbc:sqlserver://192.168.1.3:1433;instance=SQLEXPRESS:1433;databaseName=EnrollmentSystemjdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=EnrollmentSystem;encrypt=true;trustServerCertificate=true","admin","12345");
-            // Return the connection object
-            return adminConnect;
-        // Display error message if connection fails
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    // Return null if connection fails
-    return null;
+    try {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+        String url = String.format(
+            "jdbc:sqlserver://%s:%s;instanceName=%s;databaseName=%s;encrypt=true;trustServerCertificate=true",
+            dotenv.get("DB_HOST"),
+            dotenv.get("DB_PORT"),
+            dotenv.get("DB_INSTANCE"),
+            dotenv.get("DB_NAME")
+        );
+
+        return DriverManager.getConnection(
+            url,
+            dotenv.get("DB_USER_ADMIN"),
+            dotenv.get("DB_PASS_ADMIN")
+        );
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, e);
+        return null;
+    }
     }
     
     public static void main(String[] args) {
         //User Logins for Microsoft SQL Connection
         
     }
+}
 }
