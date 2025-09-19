@@ -7,7 +7,7 @@ It integrates concepts from **Advanced Database Systems (ADS)** using **MySQL** 
 ## Features
 <ul>
   <li>Authentication: Role-based access control</li>
-  <li>**Student Management: Read, add, update, and delete student records.</li>
+  <li>Student Management: Read, add, update, and delete student records.</li>
   <li>Course Management: Read, add, update, and delete courses and its corresponding curriculum.</li>
   <li>Section Management: Read, add, update, and delete student sections.</li>
   <li>Enrollment Processing: Facilitate student enrollment in courses, ensuring prerequisites and schedules are met.</li>
