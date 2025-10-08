@@ -24,6 +24,9 @@ It integrates concepts from **Advanced Database Systems (ADS)** using **MySQL** 
   <li>JDBC: For database connectivity</li>
 </ul>
 
+![cutecat](https://github.com/user-attachments/assets/2e1aa8aa-f2c5-4297-b01a-a587add69a8e)
+
+
 <!--
 ### Installation
 1. **Clone the repository**
